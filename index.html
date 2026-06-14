@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Time Goal</title>
+    </head>
+
+    <body>
+        <h1>Compte à rebours</h1>
+
+        <input id = "hours" type="number" min = "0" placeholder="Heures">
+        <input id = "minutes" type="number" min = "0" max ="59" placeholder="Minutes">
+        <input id = "seconds" type="number" min = "0" max ="59" placeholder="Secondes">
+
+        <button id = "startButton">Démarrer</button>
+
+        <script>
+            let startButton = document.getElementById("startButton")
+
+            startButton.addEventListener("click", 
+            function()
+            {
+                let hours = document.getElementById("hours").value
+                let minutes = document.getElementById("minutes").value
+                let seconds = document.getElementById("seconds").value
+                
+                if (hours === "")
+                {
+                    hours = 0
+                }
+                else
+                {
+                    hours = parseInt(hours)
+                }
+
+                if (minutes === "")
+                {
+                    minutes = 0
+                }
+                else
+                {
+                    minutes = parseInt(minutes)
+                }
+
+                if (seconds === "")
+                {
+                    seconds = 0
+                }
+                else
+                {
+                    seconds = parseInt(seconds)
+                }
+
+                minutes = Math.max(0,Math.min(minutes, 59))
+                seconds = Math.max(0,Math.min(seconds, 59))
+
+                let secondsConvert = hours*3600 + minutes*60 + seconds
+                
+                setInterval(
+                    function()
+                    {
+                        //console.log("Conversion en secondes: ", secondsConvert)
+
+                        if (secondsConvert > 0)
+                        {
+                            secondsConvert--
+                        }
+                        
+                        hours = Math.floor(secondsConvert / 3600)
+                        minutes = Math.floor((secondsConvert % 3600) / 60)
+                        seconds = (secondsConvert % 3600) % 60
+
+                        console.log("Heures:", hours, " Minutes:", minutes, " Secondes:", seconds)
+                    },
+                    1000
+                )
+
+            })
+        </script>
+    </body>
+
+</html>
